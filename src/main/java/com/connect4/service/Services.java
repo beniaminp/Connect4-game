@@ -39,15 +39,6 @@ public class Services {
 		String check = "false";
 		if(TableBoard.myBoard[i][j] == null){
 			TableBoard.myBoard[i][j] = player;
-			for (int x = 0; x < TableBoard.myBoard.length; x++) {
-			    for (int y = 0; y < TableBoard.myBoard[i].length; y++) {
-			        System.out.print(TableBoard.myBoard[x][y] + " ");
-			    }
-			    System.out.println();
-			}
-			
-			
-			 System.out.println("=========================================");
 			 
 			if(tb.checkWin(TableBoard.myBoard, i, j)){
 				check = "true";

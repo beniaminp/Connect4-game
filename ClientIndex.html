@@ -2,14 +2,27 @@
 	<head>
 	</head>
 	<body>
-		<div id="playerName" style="margin-left: 39%; padding-top: 10%"> Player 1</div><button onclick="restart();" style="margin-left: 39%;">Restart</button>
+		<button id="start" onclick="start();" style="margin-left: 39%;margin-top: 10%">Start</button>
+		<div id="playerName" style="margin-left: 39%; padding-top: 10%"> Player 1</div><button id="restart" onclick="restart();" style="margin-left: 39%;">Restart</button>
 		<table id="tbody_id" style="margin-left: 39%;">
 		</table>
 
 		<script>
 			window.onload = function() {
-				drawTable();
+				document.getElementById("restart").style.display="none";
+				document.getElementById("playerName").style.display="none";
+				document.getElementById("tbody_id").style.display="none";
+				document.getElementById("restart").style.display="none";
 			};
+			
+			function start(){
+				document.getElementById("restart").style.display="block";
+				document.getElementById("playerName").style.display="block";
+				document.getElementById("tbody_id").style.display="block";
+				document.getElementById("restart").style.display="block";
+				document.getElementById("start").style.display="none";
+				drawTable();
+			}
 			var lastPlayer = 2;
 			
 			function createRequest() {
