@@ -12,6 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -66,6 +67,15 @@
 			    </executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
 		    <groupId>org.apache.maven.plugins</groupId>
 		    <artifactId>maven-assembly-plugin</artifactId>
 		    <version>2.4</version>
@@ -75,7 +85,7 @@
 		        </descriptors>
 		        <archive>
 		            <manifest>
-		                <mainClass>com.connect4.service.App</mainClass>
+		                <mainClass>com.connect4.App</mainClass>
 		            </manifest>
 		        </archive>
 		    </configuration>

@@ -17,7 +17,7 @@ public class Services {
 
 	@GET
 	@Path("/restart")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response restart(@QueryParam("gameId") Integer gameId) {
 		conn.deleteByGameId(gameId);
 		return startSession();
@@ -34,7 +34,7 @@ public class Services {
 
 	@GET
 	@Path("/addColor")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response addColor(@QueryParam("gameId") Integer gameId, @QueryParam("player") Integer player, @QueryParam("i") int i, @QueryParam("j") int j) {
 		TableBoard tb = new TableBoard();
 		String check = "false";

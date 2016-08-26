@@ -1,4 +1,4 @@
-package com.connect4.service;
+package com.connect4;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
