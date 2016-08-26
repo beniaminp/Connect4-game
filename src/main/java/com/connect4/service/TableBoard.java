@@ -1,7 +1,11 @@
 package com.connect4.service;
 
+import com.connect4.Util.DatabaseConn;
+
 public class TableBoard {
 	private String[][] board = new String[7][7];
+	
+	DatabaseConn conn = new DatabaseConn();
 
 	public static Integer[][] myBoard = new Integer[7][7];
 

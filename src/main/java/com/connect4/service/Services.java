@@ -9,51 +9,52 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.connect4.Util.DatabaseConn;
+
 @Path("/api")
 public class Services {
-	TableBoard tb = new TableBoard();
-	
+	DatabaseConn conn = new DatabaseConn();
+
 	@GET
 	@Path("/restart")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response restart() {
-		TableBoard.myBoard = new Integer[7][7];
-		Response response = Response.status(200).
-                entity("reloaded").
-                header("Access-Control-Allow-Origin", "*").build();
-		System.out.println("reloaded");
-		return response;
+	public Response restart(@QueryParam("gameId") Integer gameId) {
+		conn.deleteByGameId(gameId);
+		return startSession();
 	}
-	
+
 	@GET
 	@Path("/startSession")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String startSession() {
-		return "started";
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response startSession() {
+		int gameId = conn.insertGame();
+		Response response = Response.status(200).entity(gameId).header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
-	
+
 	@GET
 	@Path("/addColor")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addColor(@QueryParam("player") Integer player, @QueryParam("i") int i, @QueryParam("j") int j) {
+	public Response addColor(@QueryParam("gameId") Integer gameId, @QueryParam("player") Integer player, @QueryParam("i") int i, @QueryParam("j") int j) {
+		TableBoard tb = new TableBoard();
 		String check = "false";
-		if(TableBoard.myBoard[i][j] == null){
-			TableBoard.myBoard[i][j] = player;
-			 
-			if(tb.checkWin(TableBoard.myBoard, i, j)){
+		Integer[][] board = conn.getByGameId(gameId);
+		if (board[i][j] == 0) {
+
+			conn.insertAt(gameId, i, j, player);
+			board[i][j] = player;
+			
+			if (tb.checkWin(board, i, j)) {
 				check = "true";
-			}
-			else{
+			} else {
 				check = "false";
 			}
-		}else{
-			check = "false"	;
+		} else {
+			check = "false";
 		}
-		
-        Response response = Response.status(200).
-                entity(check).
-                header("Access-Control-Allow-Origin", "*").build();
-        return response;
-	}	
-	
+
+		Response response = Response.status(200).entity(check).header("Access-Control-Allow-Origin", "*").build();
+		return response;
+	}
+
 }

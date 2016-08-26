@@ -5,8 +5,12 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import com.connect4.Util.DatabaseConn;
+
 public class App {
 	public static void main(String[] args) {
+		DatabaseConn conn = new DatabaseConn();
+		conn.createTables();
 
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
 		context.setContextPath("/");
